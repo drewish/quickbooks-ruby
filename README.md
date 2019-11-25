@@ -108,8 +108,8 @@ Most likely you will want to persist the OAuth access credentials so that users 
 An example database table would have fields likes:
 
 ```sql
-access_token varchar(255),
-refresh_token varchar(255),
+access_token varchar(822),
+refresh_token varchar(50),
 realm_id varchar(255)
 ```
 
@@ -132,8 +132,9 @@ Each access token is only valid for one hour. The access token and refresh token
 new_access_token = access_token.refresh!
 ```
 
-The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials and a new set of credentials have to be acquired by authorizing the application again.
-Unauthorized (expired) access to the API will raise a `OAuth2::Error` error.
+The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials. If that happens you will need to aquire a new set of credentials by prompting the user to reauthorize the application.
+
+Unauthorized (expired) access to the API will raise an `OAuth2::Error` error.
 
 For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0#understand-token-expiration).
 
